@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  root 'ask_statistic#index'
   post 'ask_statistic/add_stats'
 
   # The priority is based upon order of creation: first created -> highest priority.

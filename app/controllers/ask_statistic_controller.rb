@@ -1,6 +1,10 @@
 class AskStatisticController < ApplicationController
   protect_from_forgery :except => :add_stats
 
+  def index
+
+  end
+
   def add_stats
     stats = params[:stats]
     if stats.is_a? Array
