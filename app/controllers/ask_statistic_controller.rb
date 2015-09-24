@@ -5,6 +5,15 @@ class AskStatisticController < ApplicationController
 
   end
 
+  def stats
+    result = AskStatistic.order(:askId).all.map { |stat|
+      {id: stat.askId,
+       right: stat.rightCount,
+       wrong: stat.wrongCount}
+    }
+    render json: result
+  end
+
   def add_stats
     stats = params[:stats]
     if stats.is_a? Array
