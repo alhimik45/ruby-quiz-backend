@@ -38,20 +38,20 @@ class AskStatisticController < ApplicationController
   def add_stats
     stats = params[:stats]
     if stats.is_a? Array
-      asks = []
+      asks = {}
       stats.each { |stat|
         if stat.is_a? Hash and stat['id'].is_a? Fixnum
-          ask_stat = AskStatistic.find_or_create_by(askId: stat[:id])
+          ask_stat = asks[stat[:id]] || AskStatistic.find_or_create_by(askId: stat[:id])
           if stat['result']
             ask_stat.rightCount += 1
           else
             ask_stat.wrongCount += 1
           end
-          asks << ask_stat
+          asks[stat[:id]] = ask_stat
         end
       }
       ActiveRecord::Base.transaction do
-        asks.map(&:save)
+        asks.values.map(&:save)
       end
       head 200
     else
