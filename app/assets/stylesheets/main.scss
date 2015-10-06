@@ -1,0 +1,10 @@
+$boundary: 65%;
+
+#chartdiv {
+	height: 400px;
+	width: $boundary;
+	float: left;
+}
+#ask-info {
+	margin-left: $boundary;
+}
